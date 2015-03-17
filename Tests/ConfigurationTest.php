@@ -21,7 +21,15 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        $cfg = array(
+            'path1.to1' => 'value11',
+            'path1.to2' => 'value12',
+            'path2' => array(
+                'to1' => 'value21'
+            )
+        );
         $this->object = new Configuration(new ConfigurationHandler());
+        $this->object->setArray($cfg);
     }
 
     /**
@@ -86,11 +94,9 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      * @todo   Implement testOffsetGet().
      */
     public function testOffsetGet()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+    {   
+        $this->assertEquals('value11', $this->object['path1.to1']);
+        $this->assertEquals('value21', $this->object['path2.to1']);
     }
 
     /**
@@ -99,10 +105,11 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetSet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object['path1.to3'] = 'value13';
+        $this->assertEquals('value13', $this->object['path1.to3']);
+
+        //$this->object['path1']['to4'] = 'value14';
+        //$this->assertEquals('value14', $this->object['path1.to4']);
     }
 
     /**
