@@ -38,7 +38,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        
+
     }
 
     /**
@@ -47,10 +47,12 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->setArray(array('foo' => 'bar'));
+        $this->assertEquals('value11', $this->object['path1.to1']);
+        $this->assertEquals('bar', $this->object['foo']);
+
+        $this->object->setArray(array('foo1' => array('foo2' => 'bar')));
+        $this->assertEquals('bar', $this->object['foo1.foo2']);
     }
 
     /**
@@ -59,42 +61,43 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDefaults()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->setArray(array('http.version' => 'bar'));
+        $this->assertEquals('bar', $this->object['http.version']);
+
+        $this->object->setDefaults();
+        $this->assertEquals('1.1', $this->object['http.version']);
     }
 
     /**
      * @covers Fobia\Configuration\Configuration::getDefaults
      * @todo   Implement testGetDefaults().
      */
-    public function testGetDefaults()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+    // public function testGetDefaults()
+    // {
+    //     // Remove the following lines when you implement this test.
+    //     $this->markTestIncomplete(
+    //         'This test has not been implemented yet.'
+    //     );
+    // }
 
     /**
      * @covers Fobia\Configuration\Configuration::callHandlerMethod
      * @todo   Implement testCallHandlerMethod().
      */
-    public function testCallHandlerMethod()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+    // public function testCallHandlerMethod()
+    // {
+    //     // Remove the following lines when you implement this test.
+    //     $this->markTestIncomplete(
+    //         'This test has not been implemented yet.'
+    //     );
+    // }
 
     /**
      * @covers Fobia\Configuration\Configuration::offsetGet
      * @todo   Implement testOffsetGet().
      */
     public function testOffsetGet()
-    {   
+    {
         $this->assertEquals('value11', $this->object['path1.to1']);
         $this->assertEquals('value21', $this->object['path2.to1']);
     }
@@ -118,10 +121,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetExists()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertEquals(true, isset($this->object['path1.to1']));
+        $this->assertEquals(false, isset($this->object['path1.to5']));
     }
 
     /**
@@ -130,22 +131,21 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetUnset()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertEquals('value11', $this->object['path1.to1']);
+        unset($this->object['path1.to1']);
+        $this->assertEquals(null, $this->object['path1.to1']);
     }
 
     /**
      * @covers Fobia\Configuration\Configuration::getIterator
      * @todo   Implement testGetIterator().
      */
-    public function testGetIterator()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+    // public function testGetIterator()
+    // {
+    //     // Remove the following lines when you implement this test.
+    //     $this->markTestIncomplete(
+    //         'This test has not been implemented yet.'
+    //     );
+    // }
 
 }
