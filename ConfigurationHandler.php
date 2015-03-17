@@ -32,7 +32,7 @@
  */
 namespace Fobia\Configuration;
 
-use \Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
+use Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
 
 /**
  * ConfigurationHandler

@@ -32,8 +32,8 @@
  */
 namespace Fobia\Configuration;
 
-use \Fobia\Configuration\Interfaces\ConfigurationInterface;
-use \Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
+use Fobia\Configuration\Interfaces\ConfigurationInterface;
+use Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
 
 /**
  * Конфигурация
