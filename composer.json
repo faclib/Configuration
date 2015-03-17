@@ -9,6 +9,5 @@
     "autoload": {
         "psr-4": { "Fobia\\Configuration\\": ""}
     },
-    "target-dir": "Fobia/Component/Configuration",
     "minimum-stability": "dev"
 }
