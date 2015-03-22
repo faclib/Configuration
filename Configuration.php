@@ -32,6 +32,7 @@
  */
 namespace Fobia\Configuration;
 
+use Fobia\Configuration\ConfigurationHandler;
 use Fobia\Configuration\Interfaces\ConfigurationInterface;
 use Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
 
@@ -69,8 +70,11 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
      * Constructor
      * @param mixed $handler
      */
-    public function __construct(ConfigurationHandlerInterface $handler)
+    public function __construct(ConfigurationHandlerInterface $handler = null)
     {
+        if ($handler === null) {
+            $handler = new ConfigurationHandler();
+        }
         $this->handler = $handler;
 
         $this->setDefaults();
