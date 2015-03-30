@@ -49,13 +49,13 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->object = new Configuration(new ConfigurationHandler());
         $this->object->setArray($cfg);
     }
-    public function testConstructorSetUps()
+    
+    public function testConstructorDefaultHandler()
     {
-        print_r($this->object['path1']);
-        print_r($this->object['path1']['to2']);
-        print_r($this->object['path2']['to1']);
-        
+        $cfg = new Configuration();
+        $this->assertEquals(get_class($this->object), get_class($cfg));
     }
+    
     public function testConstructorExtends()
     {
         $values = array("param" => "value");
