@@ -1,12 +1,13 @@
 <?php
 
-namespace Fobia\Configuration;
+// namespace Fobia\Configuration;
 
 use Fobia\Configuration\ConfigurationHandler;
+use Fobia\Configuration\Configuration;
 
 class HandlerTest extends ConfigurationHandler
 {
-    
+
 }
 
 class MyConfiguration extends Configuration
@@ -49,21 +50,21 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->object = new Configuration(new ConfigurationHandler());
         $this->object->setArray($cfg);
     }
-    
+
     public function testConstructorDefaultHandler()
     {
         $cfg = new Configuration();
         $this->assertEquals(get_class($this->object), get_class($cfg));
     }
-    
+
     public function testConstructorExtends()
     {
         $values = array("param" => "value");
         $con = new MyConfiguration();
         $con->setArray($values);
 
-        $this->assertSame('1.2', $con['self.version']); 
-        $this->assertSame($values['param'], $con['param']); 
+        $this->assertSame('1.2', $con['self.version']);
+        $this->assertSame($values['param'], $con['param']);
     }
 
     public function testConstructorDefault()
@@ -72,9 +73,9 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $con = new Configuration();
         $con->setArray($values);
 
-        $this->assertSame($values['param'], $con['param']);  
+        $this->assertSame($values['param'], $con['param']);
     }
-    
+
     public function testConstructorInjection()
     {
         $values = array("param" => "value");
