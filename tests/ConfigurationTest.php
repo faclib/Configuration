@@ -25,8 +25,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
 
     public $defaults = array(
-        // HTTP
-        'http.version' => '1.1'
+        'self.version' => '1.2',
+        'self.name' => 'MyConfiguration',
     );
 
     /**
@@ -87,7 +87,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDefaultValues()
     {
-        $con = new Configuration(new HandlerTest);
+        $con = new MyConfiguration(new HandlerTest);
 
         foreach ($this->defaults as $key => $value) {
             $this->assertEquals($con[$key], $value);
@@ -96,7 +96,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefaultValues()
     {
-        $con = new Configuration(new HandlerTest);
+        $con = new MyConfiguration(new HandlerTest);
         $defaults = $con->getDefaults();
 
         foreach ($this->defaults as $key => $value) {
@@ -135,11 +135,12 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDefaults()
     {
-        $this->object->setArray(array('http.version' => 'bar'));
-        $this->assertEquals('bar', $this->object['http.version']);
+        $con = new MyConfiguration(new HandlerTest);
+        $con->setArray(array('self.version' => 'bar'));
+        $this->assertEquals('bar', $con['self.version']);
 
-        $this->object->setDefaults();
-        $this->assertEquals('1.1', $this->object['http.version']);
+        $con->setDefaults();
+        $this->assertEquals('1.2', $con['self.version']);
     }
 
     /**
