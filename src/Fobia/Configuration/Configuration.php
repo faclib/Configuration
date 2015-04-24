@@ -67,13 +67,17 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
      * Constructor
      * @param mixed $handler
      */
-    public function __construct(ConfigurationHandlerInterface $handler = null)
+    public function __construct(ConfigurationHandlerInterface $handler = null, array $defaults = null)
     {
         if ($handler === null) {
             $handler = new ConfigurationHandler();
         }
         $this->handler = $handler;
-
+        
+        if ($defaults) {
+            $this->defaults = $defaults;
+        }
+        
         $this->setDefaults();
     }
 

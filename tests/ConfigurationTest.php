@@ -66,7 +66,26 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('1.2', $con['self.version']);
         $this->assertSame($values['param'], $con['param']);
     }
+    
+    public function testConstructorSetDefault()
+    {
+        $values = array("param" => "value");
+        $con = new Configuration(null, $values);
 
+        $this->assertSame($values['param'], $con['param']);
+        
+        $defaults = $con->getDefaults();
+        $this->assertEquals($defaults["param"], $values["param"]);
+        
+        $con->setArray(array('param' => 'foo'));
+        $con['param1'] = 'bar';
+        $this->assertEquals('foo', $con["param"]);
+        $this->assertEquals('bar', $con["param1"]);
+        
+        $con->setDefaults();
+        $this->assertEquals('value', $con["param"]);
+    }
+    
     public function testConstructorDefault()
     {
         $values = array("param" => "value");
