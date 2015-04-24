@@ -61,10 +61,7 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
      * Значения по умолчанию
      * @var array
      */
-    protected $defaults = array(
-        // HTTP
-        'http.version' => '1.1',
-    );
+    protected $defaults = array();
 
     /**
      * Constructor
