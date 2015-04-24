@@ -61,22 +61,23 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
      * Значения по умолчанию
      * @var array
      */
-    protected $defaults = array(
-        // HTTP
-        'http.version' => '1.1',
-    );
+    protected $defaults = array();
 
     /**
      * Constructor
      * @param mixed $handler
      */
-    public function __construct(ConfigurationHandlerInterface $handler = null)
+    public function __construct(ConfigurationHandlerInterface $handler = null, array $defaults = null)
     {
         if ($handler === null) {
             $handler = new ConfigurationHandler();
         }
         $this->handler = $handler;
-
+        
+        if ($defaults) {
+            $this->defaults = $defaults;
+        }
+        
         $this->setDefaults();
     }
 

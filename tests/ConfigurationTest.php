@@ -1,12 +1,13 @@
 <?php
 
-namespace Fobia\Configuration;
+// namespace Fobia\Configuration;
 
 use Fobia\Configuration\ConfigurationHandler;
+use Fobia\Configuration\Configuration;
 
 class HandlerTest extends ConfigurationHandler
 {
-    
+
 }
 
 class MyConfiguration extends Configuration
@@ -24,8 +25,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
 
     public $defaults = array(
-        // HTTP
-        'http.version' => '1.1'
+        'self.version' => '1.2',
+        'self.name' => 'MyConfiguration',
     );
 
     /**
@@ -49,32 +50,51 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->object = new Configuration(new ConfigurationHandler());
         $this->object->setArray($cfg);
     }
-    
+
     public function testConstructorDefaultHandler()
     {
         $cfg = new Configuration();
         $this->assertEquals(get_class($this->object), get_class($cfg));
     }
-    
+
     public function testConstructorExtends()
     {
         $values = array("param" => "value");
         $con = new MyConfiguration();
         $con->setArray($values);
 
-        $this->assertSame('1.2', $con['self.version']); 
-        $this->assertSame($values['param'], $con['param']); 
+        $this->assertSame('1.2', $con['self.version']);
+        $this->assertSame($values['param'], $con['param']);
     }
+    
+    public function testConstructorSetDefault()
+    {
+        $values = array("param" => "value");
+        $con = new Configuration(null, $values);
 
+        $this->assertSame($values['param'], $con['param']);
+        
+        $defaults = $con->getDefaults();
+        $this->assertEquals($defaults["param"], $values["param"]);
+        
+        $con->setArray(array('param' => 'foo'));
+        $con['param1'] = 'bar';
+        $this->assertEquals('foo', $con["param"]);
+        $this->assertEquals('bar', $con["param1"]);
+        
+        $con->setDefaults();
+        $this->assertEquals('value', $con["param"]);
+    }
+    
     public function testConstructorDefault()
     {
         $values = array("param" => "value");
         $con = new Configuration();
         $con->setArray($values);
 
-        $this->assertSame($values['param'], $con['param']);  
+        $this->assertSame($values['param'], $con['param']);
     }
-    
+
     public function testConstructorInjection()
     {
         $values = array("param" => "value");
@@ -86,7 +106,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDefaultValues()
     {
-        $con = new Configuration(new HandlerTest);
+        $con = new MyConfiguration(new HandlerTest);
 
         foreach ($this->defaults as $key => $value) {
             $this->assertEquals($con[$key], $value);
@@ -95,7 +115,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefaultValues()
     {
-        $con = new Configuration(new HandlerTest);
+        $con = new MyConfiguration(new HandlerTest);
         $defaults = $con->getDefaults();
 
         foreach ($this->defaults as $key => $value) {
@@ -134,11 +154,12 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDefaults()
     {
-        $this->object->setArray(array('http.version' => 'bar'));
-        $this->assertEquals('bar', $this->object['http.version']);
+        $con = new MyConfiguration(new HandlerTest);
+        $con->setArray(array('self.version' => 'bar'));
+        $this->assertEquals('bar', $con['self.version']);
 
-        $this->object->setDefaults();
-        $this->assertEquals('1.1', $this->object['http.version']);
+        $con->setDefaults();
+        $this->assertEquals('1.2', $con['self.version']);
     }
 
     /**
