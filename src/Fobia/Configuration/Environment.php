@@ -53,6 +53,7 @@ class Environment extends Collection implements EnvironmentInterface
             'HTTP_ACCEPT_CHARSET'  => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
             'REMOTE_ADDR'          => '127.0.0.1',
             'REQUEST_TIME'         => time(),
+            'REQUEST_TIME_FLOAT'   => microtime(true),
         ), $userData);
 
         return new static($data);
