@@ -50,7 +50,23 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->object = new Configuration(new ConfigurationHandler());
         $this->object->setArray($cfg);
     }
-
+    
+    public function testConstructorOptions()
+    {
+        $values = array("param" => "value");
+        $con = new Configuration($values);
+        
+        $this->assertSame($values['param'], $con['param']);
+        
+        $con->setArray(array('param' => 'foo'));
+        $con['param1'] = 'bar';
+        $this->assertEquals('foo', $con["param"]);
+        $this->assertEquals('bar', $con["param1"]);
+        
+        $con->setDefaults();
+        $this->assertEquals('value', $con["param"]);
+    }
+    
     public function testConstructorDefaultHandler()
     {
         $cfg = new Configuration();
