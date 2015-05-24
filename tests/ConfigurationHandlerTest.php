@@ -103,4 +103,47 @@ class ConfigurationHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($con['param']));
         $this->assertFalse(isset($con['service']));
     }
+
+    public function testFlattenArray()
+    {
+        $con = new ConfigurationHandler;
+        $a0 = array(
+            'k2.1' => array(
+                'k2.3.1' => 'val231'
+            ),
+        );
+        $p = $con->parseFlattenArray($a0);
+        $this->assertArrayHasKey('k2.1.k2.3.1', $p);
+    }
+
+    public function testFlattenArrayWithPrefix()
+    {
+        $con = new ConfigurationHandler;
+        $a0 = array('k2.1' => 'val21');
+
+        $p = $con->parseFlattenArray($a0, 'pref');
+        $this->assertArrayHasKey('pref.k2.1', $p);
+    }
+
+    public function testFlattenArrayWithSeparator()
+    {
+        $con = new ConfigurationHandler;
+        $a0 = array(
+            'foo' => array(
+                'bar' => array(
+                    'baz' => 'val'
+                ),
+            ),
+            'bar:1' => array(
+                'bar:2' => 'val2'
+            )
+        );
+
+        $p = $con->parseFlattenArray($a0, '', ':');
+        $this->assertArrayHasKey('foo:bar:baz', $p);
+        $this->assertEquals('val', $p['foo:bar:baz']);
+
+        $this->assertArrayHasKey('bar:1:bar:2', $p);
+        $this->assertEquals('val2', $p['bar:1:bar:2']);
+    }
 }
