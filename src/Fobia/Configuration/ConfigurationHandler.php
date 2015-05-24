@@ -89,7 +89,7 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
      */
     public function getAllFlat()
     {
-        return $this->flattenArray($this->values);
+        return $this->parseFlattenArray($this->values, '', $this->separator);
     }
 
     /**
@@ -98,7 +98,7 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
      */
     public function getKeys()
     {
-        $flattened = $this->flattenArray($this->values);
+        $flattened = $this->getAllFlat();
         return array_keys($flattened);
     }
 
@@ -233,22 +233,21 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
      * Flatten a nested array to a separated key
      *
      * @param  array  $array
+     * @param  string $prefix
      * @param  string $separator
      * @return array
      */
-    protected function flattenArray(array $array, $separator = null)
+    public static function parseFlattenArray(array $array, $prefix = '', $separator = '.')
     {
         $flattened = array();
 
-        if (is_null($separator)) {
-            $separator = $this->separator;
-        }
+        $prefix = trim($prefix, $separator);
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                $flattened = array_merge($flattened, $this->flattenArray($value, $key.$separator));
+                $flattened = array_merge($flattened, self::parseFlattenArray($value, $prefix.$separator.$key, $separator));
             } else {
-                $flattened[trim($separator.$key, $this->separator)] = $value;
+                $flattened[trim($prefix.$separator.$key, $separator)] = $value;
             }
         }
 
