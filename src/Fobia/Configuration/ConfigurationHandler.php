@@ -40,6 +40,7 @@ use Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
  * которые могут быть доступны и хранятся с использованием '.'
  *
  * @author     John Porter
+ * @author     Dmitriy Tyurin
  * @link       http://www.slimframework.com
  * @license    http://www.slimframework.com/license
  */

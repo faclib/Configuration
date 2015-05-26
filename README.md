@@ -1,12 +1,14 @@
 # Configuration
 
-Конфигурация в виде массива.
+Конфигурация в виде массива. 
+
+[See Slimframework](https://github.com/slimphp/Slim)
 
 ## Installation / Usage
 
     {
         "require": {
-            "fobia/php-configuration": ">=1.0"
+            "fobia/php-configuration": "*"
         }
     }
 
