@@ -7,7 +7,6 @@
  * @link        http://www.slimframework.com
  * @license     http://www.slimframework.com/license
  * @version     2.3.0
- * @package     Slim
  *
  * MIT LICENSE
  *
@@ -64,31 +63,30 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
     protected $defaults = array();
 
     /**
-     * Constructor
-     * @param mixed $handler
+     * Configuration constructor.
      */
-//    public function __construct(ConfigurationHandlerInterface $handler = null, array $defaults = null)
-    public function __construct($handler = null)
+    public function __construct()
     {
         $defaults = null;
-        if (is_array($handler)) {
-            $defaults = $handler;
-            $handler = null;
+        $args = (func_num_args() > 0) ? func_get_args() : array();
+
+        if (!$args || !($args[0] instanceof ConfigurationHandlerInterface)) {
+            $this->handler = new ConfigurationHandler();
+        } else {
+            $this->handler = $args[0];
         }
-        if (func_num_args() > 1) {
-            $defaults = func_get_arg(1);
+
+        if (is_array($args[0])) {
+            $defaults = ConfigurationHandler::parseFlattenArray($args[0]);
         }
-        
-        if ($handler === null || !($handler instanceof ConfigurationHandlerInterface)) {
-            $handler = new ConfigurationHandler();
-        }
-        $this->handler = $handler;
-        
         if (is_array($defaults)) {
             $this->defaults = $defaults;
         }
-        
         $this->setDefaults();
+
+        if (isset($args[1]) && is_array($args[1])) {
+            $this->handler->setArray($args[1]);
+        }
     }
 
     /**

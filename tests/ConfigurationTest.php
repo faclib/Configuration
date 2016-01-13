@@ -86,11 +86,12 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testConstructorSetDefault()
     {
         $values = array("param" => "value");
-        $con = new Configuration(null, $values);
+        $con = new Configuration($values);
 
         $this->assertSame($values['param'], $con['param']);
         
         $defaults = $con->getDefaults();
+        // var_dump($con);
         $this->assertEquals($defaults["param"], $values["param"]);
         
         $con->setArray(array('param' => 'foo'));
