@@ -47,7 +47,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'to1' => 'value21'
             )
         );
-        $this->object = new Configuration(new ConfigurationHandler());
+        $this->object = new Configuration();
         $this->object->setArray($cfg);
     }
     
@@ -115,7 +115,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testConstructorInjection()
     {
         $values = array("param" => "value");
-        $con = new Configuration(new HandlerTest);
+        $con = new Configuration(array(), new HandlerTest);
         $con->setArray($values);
 
         $this->assertSame($values['param'], $con['param']);
@@ -123,7 +123,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDefaultValues()
     {
-        $con = new MyConfiguration(new HandlerTest);
+        $con = new MyConfiguration(array(), new HandlerTest);
 
         foreach ($this->defaults as $key => $value) {
             $this->assertEquals($con[$key], $value);
@@ -132,7 +132,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDefaultValues()
     {
-        $con = new MyConfiguration(new HandlerTest);
+        $con = new MyConfiguration(array(), new HandlerTest);
         $defaults = $con->getDefaults();
 
         foreach ($this->defaults as $key => $value) {
@@ -142,7 +142,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testCallHandlerMethod()
     {
-        $con = new Configuration(new HandlerTest);
+        $con = new Configuration(array(), new HandlerTest);
         $defaultKeys = array_keys($this->defaults);
         $defaultKeys = ksort($defaultKeys);
         $configKeys = $con->callHandlerMethod('getKeys');
@@ -171,7 +171,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDefaults()
     {
-        $con = new MyConfiguration(new HandlerTest);
+        $con = new MyConfiguration(array(), new HandlerTest);
         $con->setArray(array('self.version' => 'bar'));
         $this->assertEquals('bar', $con['self.version']);
 

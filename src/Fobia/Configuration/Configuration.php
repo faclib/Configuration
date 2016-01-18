@@ -64,29 +64,20 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
 
     /**
      * Configuration constructor.
+     *
+     * @param array                                                          $defaults
+     * @param \Fobia\Configuration\Interfaces\ConfigurationHandlerInterface  $handler
      */
-    public function __construct()
+    public function __construct(array $defaults = array(), ConfigurationHandlerInterface $handler = null)
     {
-        $defaults = null;
-        $args = (func_num_args() > 0) ? func_get_args() : array();
-
-        if (!$args || !($args[0] instanceof ConfigurationHandlerInterface)) {
-            $this->handler = new ConfigurationHandler();
-        } else {
-            $this->handler = $args[0];
+        if ($handler === null) {
+            $handler = new ConfigurationHandler();
         }
-
-        if (is_array($args[0])) {
-            $defaults = ConfigurationHandler::parseFlattenArray($args[0]);
-        }
-        if (is_array($defaults)) {
+        if ($defaults) {
             $this->defaults = $defaults;
         }
+        $this->handler = $handler;
         $this->setDefaults();
-
-        if (isset($args[1]) && is_array($args[1])) {
-            $this->handler->setArray($args[1]);
-        }
     }
 
     /**
