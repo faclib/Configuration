@@ -2,11 +2,11 @@
 /**
  * Slim - a micro PHP 5 framework
  *
- * @author      Josh Lockhart <info@joshlockhart.com>
- * @copyright   2011 Josh Lockhart
- * @link        http://www.slimframework.com
- * @license     http://www.slimframework.com/license
- * @version     2.3.5
+ * @author    Josh Lockhart <info@joshlockhart.com>
+ * @copyright 2011 Josh Lockhart
+ * @link      http://www.slimframework.com
+ * @license   http://www.slimframework.com/license
+ * @version   2.3.5
  *
  * MIT LICENSE
  *
@@ -40,9 +40,11 @@ class ConfigurationHandlerTest extends \PHPUnit_Framework_TestCase
     public function testSetArray()
     {
         $con = new ConfigurationHandler;
-        $con->setArray(array(
+        $con->setArray(
+            array(
             'foo' => 'bar'
-        ));
+            )
+        );
 
         $this->assertEquals($con['foo'], 'bar');
     }
@@ -58,15 +60,17 @@ class ConfigurationHandlerTest extends \PHPUnit_Framework_TestCase
     public function testKeys()
     {
         $con = new ConfigurationHandler;
-        $con->setArray(array(
+        $con->setArray(
+            array(
             'foo' => 'bar'
-        ));
+            )
+        );
         $keys = $con->getKeys();
 
         $this->assertEquals($keys[0], 'foo');
     }
 
-    public function  testWithNamespacedKey()
+    public function testWithNamespacedKey()
     {
         $con = new ConfigurationHandler;
         $con['my.namespaced.keyname'] = 'My Value';

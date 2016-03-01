@@ -2,11 +2,11 @@
 /**
  * Slim - a micro PHP 5 framework
  *
- * @author      Josh Lockhart <info@slimframework.com>
- * @copyright   2011 Josh Lockhart
- * @link        http://www.slimframework.com
- * @license     http://www.slimframework.com/license
- * @version     2.3.0
+ * @author    Josh Lockhart <info@slimframework.com>
+ * @copyright 2011 Josh Lockhart
+ * @link      http://www.slimframework.com
+ * @license   http://www.slimframework.com/license
+ * @version   2.3.0
  *
  * MIT LICENSE
  *
@@ -38,10 +38,10 @@ use Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
  * Класс конфигурации по умолчанию, который обеспечивает конфигурацию значений хранящихся в виде вложенных массивов,
  * которые могут быть доступны и хранятся с использованием '.'
  *
- * @author     John Porter
- * @author     Dmitriy Tyurin
- * @link       http://www.slimframework.com
- * @license    http://www.slimframework.com/license
+ * @author  John Porter
+ * @author  Dmitriy Tyurin
+ * @link    http://www.slimframework.com
+ * @license http://www.slimframework.com/license
  */
 class ConfigurationHandler implements ConfigurationHandlerInterface
 {
@@ -66,7 +66,8 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
     /**
      * Установить массив опций конфигурации
      * Слияние при условии значения по умолчанию, чтобы гарантировать что все необходимые значения устанавливаются
-     * @param array $values
+     *
+     * @param    array $values
      * @required
      */
     public function setArray(array $values = array())
@@ -114,8 +115,8 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
 
     /**
      * Set nested array values based on a separated key
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param  string $key
+     * @param  mixed  $value
      * @return array
      */
     public function offsetSet($key, $value)
@@ -125,7 +126,7 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
 
     /**
      * Check an array has a value based on a separated key
-     * @param  string  $key
+     * @param  string $key
      * @return boolean
      */
     public function offsetExists($key)
@@ -135,7 +136,7 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
 
     /**
      * Remove nested array value based on a separated key
-     * @param  string  $key
+     * @param  string $key
      */
     public function offsetUnset($key)
     {
@@ -190,9 +191,9 @@ class ConfigurationHandler implements ConfigurationHandlerInterface
     /**
      * Set nested array values based on a separated key
      *
-     * @param  string  $key
-     * @param  mixed   $value
-     * @param  array   $array
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $array
      * @return array
      */
     protected function setValue($key, $value, array &$array = array())

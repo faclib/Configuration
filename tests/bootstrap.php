@@ -9,7 +9,7 @@ function customAutoLoader($class)
 {
     $file = dirname(__FILE__) . '/' . $class . '.php';
     if (file_exists($file)) {
-        require $file;
+        include $file;
     } else {
         return;
     }

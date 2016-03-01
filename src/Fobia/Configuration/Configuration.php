@@ -2,11 +2,11 @@
 /**
  * Slim - a micro PHP 5 framework
  *
- * @author      Josh Lockhart <info@slimframework.com>
- * @copyright   2011 Josh Lockhart
- * @link        http://www.slimframework.com
- * @license     http://www.slimframework.com/license
- * @version     2.3.0
+ * @author    Josh Lockhart <info@slimframework.com>
+ * @copyright 2011 Josh Lockhart
+ * @link      http://www.slimframework.com
+ * @license   http://www.slimframework.com/license
+ * @version   2.3.0
  *
  * MIT LICENSE
  *
@@ -39,9 +39,9 @@ use Fobia\Configuration\Interfaces\ConfigurationHandlerInterface;
  * Конфигурация
  * Использует класс обработчика конфигурации для разбора конфигурационных данных, доступ к которым в виде массива.
  *
- * @author     John Porter
- * @link       http://www.slimframework.com
- * @license    http://www.slimframework.com/license
+ * @author  John Porter
+ * @link    http://www.slimframework.com
+ * @license http://www.slimframework.com/license
  */
 class Configuration implements ConfigurationInterface, \IteratorAggregate
 {
@@ -65,8 +65,8 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
     /**
      * Configuration constructor.
      *
-     * @param array                                                          $defaults
-     * @param \Fobia\Configuration\Interfaces\ConfigurationHandlerInterface  $handler
+     * @param array                                                         $defaults
+     * @param \Fobia\Configuration\Interfaces\ConfigurationHandlerInterface $handler
      */
     public function __construct(array $defaults = array(), ConfigurationHandlerInterface $handler = null)
     {
@@ -82,6 +82,8 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
 
     /**
      * Установить настройки по умолчанию с помощью обработчика
+     *
+     * @param array $values
      */
     public function setArray(array $values)
     {
@@ -98,6 +100,7 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
 
     /**
      * Получить параметры по умолчанию
+     *
      * @return array
      */
     public function getDefaults()
@@ -107,8 +110,10 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
 
     /**
      * Вызвать метод из обработчика
-     * @param  string $method
-     * @param  array $params
+     *
+     * @param string $method
+     * @param array  $params
+     *
      * @return mixed
      */
     public function callHandlerMethod($method, array $params = array())
@@ -118,7 +123,9 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
 
     /**
      * Получить значение
-     * @param  string $key
+     *
+     * @param string $key
+     * 
      * @return mixed
      */
     public function offsetGet($key)
@@ -129,7 +136,7 @@ class Configuration implements ConfigurationInterface, \IteratorAggregate
     /**
      * Set a value
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      */
     public function offsetSet($key, $value)
     {

@@ -2,12 +2,12 @@
 /**
  * Slim - a micro PHP 5 framework
  *
- * @author      Josh Lockhart <info@slimframework.com>
- * @copyright   2011 Josh Lockhart
- * @link        http://www.slimframework.com
- * @license     http://www.slimframework.com/license
- * @version     2.3.0
- * @package     Slim
+ * @author    Josh Lockhart <info@slimframework.com>
+ * @copyright 2011 Josh Lockhart
+ * @link      http://www.slimframework.com
+ * @license   http://www.slimframework.com/license
+ * @version   2.3.0
+ * @package   Slim
  *
  * MIT LICENSE
  *
@@ -35,9 +35,9 @@ namespace Fobia\Configuration\Interfaces;
 /**
  * Configuration Handler Interface
  *
- * @author     John Porter
- * @link       http://www.slimframework.com
- * @license    http://www.slimframework.com/license
+ * @author  John Porter
+ * @link    http://www.slimframework.com
+ * @license http://www.slimframework.com/license
  */
 interface ConfigurationHandlerInterface extends \ArrayAccess, \IteratorAggregate
 {
